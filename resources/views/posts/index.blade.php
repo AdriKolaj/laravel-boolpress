@@ -25,7 +25,7 @@
           <td>{{ $post->title }}</td>
           <td>{{ $post->subtitle }}</td>
           <td>{{ $post->author }}</td>
-          <td><img src="{{ $post->img }}" alt=""></td>
+          <td><img class="img-fluid" src="{{ $post->img }}" alt=""></td>
           <td>
             <a href="{{ route("posts.show", ['post' =>$post->id]) }}" class="btn btn-primary">MOSTRA</a>
           </td>

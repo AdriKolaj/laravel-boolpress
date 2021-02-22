@@ -43,18 +43,18 @@
 		<div class="form-group">
 			<label for="post_status">Stato del post</label>
 			<select class="custom-select" name="post_status" id="post_status">
-				<option value="draft">Draft</option>
-				<option value="private">Private</option>
-				<option value="public">Public</option>
+				<option value="draft" {{ old('comments_status') == 'draft' ? 'selected' : '' }}>Draft</option>
+				<option value="private" {{ old('comments_status') == 'private' ? 'selected' : '' }}>Private</option>
+				<option value="public" {{ old('comments_status') == 'public' ? 'selected' : '' }}>Public</option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label for="comments_status">Stato Commenti</label>
 			<select class="custom-select" name="comments_status" id="comments_status">
-				<option value="open">Open</option>
-				<option value="closed">Closed</option>
-				<option value="private">Private</option>
+				<option value="open" {{ old('comments_status') == 'open' ? 'selected' : '' }}>Open</option>
+				<option value="closed {{ old('comments_status') == 'closed' ? 'selected' : '' }}">Closed</option>
+				<option value="private" {{ old('comments_status') == 'private' ? 'selected' : '' }}>Private</option>
 			</select>
 		</div>
 
