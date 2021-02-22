@@ -9,9 +9,13 @@
     <thead>
       <tr>
         <th>ID</th>
+        <th>Title</th>
+        <th>Subtitle</th>
         <th>Author</th>
         <th>Text</th>
         <th>Image</th>
+        <th></th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -19,10 +23,24 @@
       @foreach ($posts as $post)
         <tr>
           <td>{{ $post->id }}</td>
+          <td>{{ $post->title }}</td>
+          <td>{{ $post->subtitle }}</td>
           <td>{{ $post->author }}</td>
           <td>{{ $post->text }}</td>
           <td><img src="{{ $post->img }}" alt=""></td>
-          <td><a href="{{ route("posts.show", ['post' =>$post->id]) }}" class="btn btn-primary">MOSTRA</a></td>
+          <td>
+            <a href="{{ route("posts.show", ['post' =>$post->id]) }}" class="btn btn-primary">MOSTRA</a>
+          </td>
+          <td class="text-center">
+            <a href="{{ route("posts.edit", ['post' =>$post->id]) }}" class="btn btn-primary"><i class="far fa-edit"></i></a>
+          </td>
+          <td>
+            <form action="{{ route('posts.destroy', ['post' =>$post->id]) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </td>
         </tr> 
       @endforeach
     </tbody>
