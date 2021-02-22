@@ -52,7 +52,7 @@
 @endsection
 
 @section('footer')
-<div class="text-right">
+<div class="text-right my-4">
   <a href="{{ route("posts.index") }}" class="btn btn-lg btn-dark">Torna all'elenco dei post</a>  
 </div>    
 @endsection

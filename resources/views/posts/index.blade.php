@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+  @if(session()->get('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div><br />
+  @elseif (session()->get('deleted'))
+  <div class="alert alert-danger">
+      {{ session()->get('deleted') }}
+  </div><br />
+  @endif
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
@@ -33,7 +42,7 @@
             <a href="{{ route("posts.edit", ['post' =>$post->id]) }}" class="btn btn-primary"><i class="far fa-edit"></i></a>
           </td>
           <td>
-            <form action="{{ route('posts.destroy', ['post' =>$post->id]) }}" method="POST">
+            <form action="{{ route('posts.destroy', ['post' =>$post->id]) }}" method="POST" onSubmit="return confirm('Sei sicuro di voler eliminare questo post?')">
               @csrf
               @method('DELETE')
               <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>

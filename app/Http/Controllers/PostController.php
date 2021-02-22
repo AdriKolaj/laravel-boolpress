@@ -62,7 +62,7 @@ class PostController extends Controller
 
         return redirect()
             ->route("posts.index")
-            ->with("message", "Post " . $post->title . " creato correttamente!");
+            ->with("success", "Post creato correttamente!");
     }
 
     /**
@@ -109,7 +109,7 @@ class PostController extends Controller
 
         return redirect()
             ->route('posts.index')
-            ->with('message', 'Post' . $post->title . " aggiornato correttamente!");
+            ->with('success', 'Post ' . $post->title . ' aggiornato correttamente!');
     }
 
     /**
@@ -124,6 +124,6 @@ class PostController extends Controller
 
         return redirect()
         ->route('posts.index')
-        ->with('message', 'Post ' . $post->title . ' eliminato correttamente');
+        ->with('deleted', 'Post ' . $post->title . ' eliminato correttamente');
     }
 }
