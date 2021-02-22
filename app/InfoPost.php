@@ -9,6 +9,7 @@ class InfoPost extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'post_id',
         'post_status',
         'comments_status'
     ];

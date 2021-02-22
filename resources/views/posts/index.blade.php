@@ -12,7 +12,6 @@
         <th>Title</th>
         <th>Subtitle</th>
         <th>Author</th>
-        <th>Text</th>
         <th>Image</th>
         <th></th>
         <th></th>
@@ -26,7 +25,6 @@
           <td>{{ $post->title }}</td>
           <td>{{ $post->subtitle }}</td>
           <td>{{ $post->author }}</td>
-          <td>{{ $post->text }}</td>
           <td><img src="{{ $post->img }}" alt=""></td>
           <td>
             <a href="{{ route("posts.show", ['post' =>$post->id]) }}" class="btn btn-primary">MOSTRA</a>
@@ -45,4 +43,8 @@
       @endforeach
     </tbody>
   </table>
+
+  <div class="text-right my-4">
+    <a href="{{ route('posts.create') }}" class="btn btn-success">Crea nuovo post</a>
+  </div>
 @endsection

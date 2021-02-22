@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\InfoPost;
 use App\Comment;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    private $postValidation = [
+        'title' => 'required|max:100',
+        'subtitle' => 'required|max:80',
+        'author' => 'required|max:40',
+        'text' => 'required',
+        'img' => 'required|max:255'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +35,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view("posts.create");
     }
 
     /**
@@ -38,7 +46,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data["slug"] = Str::slug($data["title"]);
+
+        $request->validate($this->postValidation);
+
+        $post = new Post();
+        $post->fill($data);
+        $postSave = $post->save();
+
+        $data["post_id"] = $post->id;
+        $infoPost = new InfoPost();
+        $infoPost->fill($data);
+        $infoPostSave = $infoPost->save();
+
+        return redirect()
+            ->route("posts.index")
+            ->with("message", "Post " . $post->name . " creato correttamente!");
     }
 
     /**
