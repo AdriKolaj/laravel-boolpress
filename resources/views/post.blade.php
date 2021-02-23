@@ -8,7 +8,7 @@
             <img src="{{ $post->img }}" alt="{{ $post->title }}">
             <h1 class="mt-4">{{ $post->title }}</h1>
             <h3>{{ $post->subtitle }}</h3>
-            <small>{{ $post->author }} - {{ $post->created_at }}</small>
+            <small>{{ $post->author }} - {{ $post->created_at->format('l j F Y') }}</small>
             <div class="text-center">
                 @foreach ($post->tags as $tag)
                     <span class="badge badge-primary">{{ $tag->name }}</span>
@@ -17,6 +17,19 @@
         </header>
         <main>
             {{ $post->text }}
+
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    @foreach ($post->images as $image)
+                        <div class="col-4">
+                            <figure>
+                                <img src="{{ $image->link }}" alt="{{ $image->alt }}" class="img-fluid">
+                                <figcaption>{{ $image->caption }}}</figcaption>
+                            </figure>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </main>
         
     </section>
@@ -25,7 +38,7 @@
         <section id="comments" class="my-4">
             <h2>Commenti</h2>
             @foreach ($post->comments as $comment)
-                <small>{{ $comment->author }} - {{ $comment->created_at }}</small>
+                <small>{{ $comment->author }} - {{ $comment->created_at->diffForHumans() }}</small>
                 <p>{{ $comment->text }}</p>
             @endforeach
         </section>
