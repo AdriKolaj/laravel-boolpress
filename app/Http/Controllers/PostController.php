@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\InfoPost;
 use App\Comment;
+use App\Tag;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -35,7 +36,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posts.create");
+        $tags = Tag::all();
+        return view("posts.create", compact('tags'));
     }
 
     /**
@@ -59,6 +61,10 @@ class PostController extends Controller
         $infoPost = new InfoPost();
         $infoPost->fill($data);
         $infoPostSave = $infoPost->save();
+
+        if($postSave && !empty($data["tags"])) {
+            $post->tags()->attach($data["tags"]);
+        }
 
         return redirect()
             ->route("posts.index")

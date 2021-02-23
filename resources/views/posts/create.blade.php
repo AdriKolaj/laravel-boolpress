@@ -58,6 +58,16 @@
 			</select>
 		</div>
 
+		<h3 class="mt-4">Tags</h3>
+		@foreach ($tags as $tag)
+			<div class="form-group">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="tag-{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}">
+					<label class="custom-control-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+				</div>
+			</div>
+		@endforeach
+
 		<div class="my-4">
 			<button type="submit" class="btn btn-success">Salva</button>
 			<a href="{{ route('posts.index') }}" class="btn btn-secondary">Indietro</a>
