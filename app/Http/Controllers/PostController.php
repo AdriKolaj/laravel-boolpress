@@ -7,6 +7,7 @@ use App\Post;
 use App\InfoPost;
 use App\Comment;
 use App\Tag;
+use App\Image;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -37,7 +38,8 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view("posts.create", compact('tags'));
+        $images = Image::all();
+        return view("posts.create", compact('tags', 'images'));
     }
 
     /**
@@ -65,6 +67,11 @@ class PostController extends Controller
         if($postSave && !empty($data["tags"])) {
             $post->tags()->attach($data["tags"]);
         }
+        
+        if($postSave && !empty($data["images"])) {
+            $post->images()->attach($data["images"]);
+        }
+
 
         return redirect()
             ->route("posts.index")
