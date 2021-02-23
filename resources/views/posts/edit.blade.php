@@ -53,10 +53,22 @@
 			<label for="comments_status">Stato Commenti</label>
 			<select class="custom-select" name="comments_status" id="comments_status">
 				<option value="open" {{ $post->info->comments_status == 'open' ? 'selected' : '' }}>Open</option>
-				<option value="closed {{ $post->info->comments_status == 'closed' ? 'selected' : '' }}">Closed</option>
+				<option value="closed" {{ $post->info->comments_status == 'closed' ? 'selected' : '' }}>Closed</option>
 				<option value="private" {{ $post->info->comments_status == 'private' ? 'selected' : '' }}>Private</option>
 			</select>
 		</div>
+
+		<h3 class="mt-4">Tags</h3>
+		@foreach ($tags as $tag)
+			<div class="form-group">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="tag-{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}"
+					@if($post->tags->contains($tag->id)) checked @endif
+					>
+					<label class="custom-control-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+				</div>
+			</div>
+		@endforeach
 
 		<div class="my-4">
 			<button type="submit" class="btn btn-success">Salva</button>

@@ -90,7 +90,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        $tags = Tag::all();
+        return view('posts.edit', compact('post', 'tags'));
     }
 
     /**
@@ -109,9 +110,16 @@ class PostController extends Controller
 
         $post->update($data);
 
+        $infoPost = $post->infoPost;
         $infoPost = InfoPost::where('post_id', $post->id)->first();
         $data["post_id"] = $post->id;
         $infoPost->update($data);
+
+        if(empty($data["tags"])) {
+            $post->tags()->detach();
+        } else {
+            $post->tags()->sync($data["tags"]);
+        }
 
         return redirect()
             ->route('posts.index')

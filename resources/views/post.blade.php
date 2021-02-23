@@ -9,6 +9,11 @@
             <h1 class="mt-4">{{ $post->title }}</h1>
             <h3>{{ $post->subtitle }}</h3>
             <small>{{ $post->author }} - {{ $post->created_at }}</small>
+            <div class="text-center">
+                @foreach ($post->tags as $tag)
+                    <span class="badge badge-primary">{{ $tag->name }}</span>
+                @endforeach
+            </div>
         </header>
         <main>
             {{ $post->text }}
@@ -37,9 +42,10 @@
                     <label for="text">Testo</label>
                     <textarea name="text" class="form-control" id="text" rows="6" placeholder="Inserisci il commento"></textarea>
                 </div>
-                <input type="submit" value="Invia" class="btn btn-success">
+                <input type="submit" value="Invia" class="btn btn-success float-right my-4">
             </form>
         </section>
-    @endif
+        @endif
+        <a class="btn btn-secondary float-left my-4" href="{{ route('blog') }}">Torna al blog</a>
 
 @endsection
